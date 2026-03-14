@@ -1,0 +1,26 @@
+{
+  "name": "the-burning-company",
+  "version": "1.0.0",
+  "description": "Solana's Premier Deflationary Institution — automated buyback & burn agent",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "setup": "node scripts/setup-agent.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.0",
+    "@pump-fun/agent-payments-sdk": "^3.0.0",
+    "@solana/web3.js": "^1.98.0",
+    "@solana/spl-token": "^0.4.0",
+    "openai": "^4.73.0",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "twitter-api-v2": "^1.18.0"
+  }
+}

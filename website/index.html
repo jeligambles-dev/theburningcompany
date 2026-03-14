@@ -6,27 +6,24 @@
     <title>The Burning Company — $BURNING</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="image.png">
+    <link rel="icon" href="alon.png">
 </head>
 <body>
-    <!-- Fire particle canvas -->
-    <canvas id="fireCanvas"></canvas>
-
     <!-- Navigation -->
     <nav class="nav" id="mainNav">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="image.png" alt="The Burning Company" class="logo-img">
+                <img src="alon.png" alt="Agent Alun" class="logo-img">
                 <span class="nav-logo-text">The Burning Company</span>
             </a>
 
             <div class="nav-center">
                 <a href="#about" class="nav-link">About</a>
-                <a href="#tokenomics" class="nav-link">Tokenomics</a>
+                <a href="#how" class="nav-link">How It Works</a>
                 <a href="#burns" class="nav-link">Live Feed</a>
-                <a href="#agent" class="nav-link">Agent</a>
+                <a href="#agent" class="nav-link">Agent Alun</a>
                 <a href="#roadmap" class="nav-link">Roadmap</a>
             </div>
 
@@ -46,9 +43,9 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#about">About</a>
-        <a href="#tokenomics">Tokenomics</a>
+        <a href="#how">How It Works</a>
         <a href="#burns">Live Feed</a>
-        <a href="#agent">Agent</a>
+        <a href="#agent">Agent Alun</a>
         <a href="#roadmap">Roadmap</a>
         <a href="https://x.com/_BurningCompany" target="_blank">Twitter / X</a>
         <a href="#" class="mobile-buy-btn">Buy $BURNING</a>
@@ -56,17 +53,15 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-logo">
-            <img src="image.png" alt="The Burning Company" class="hero-logo-img">
+        <div class="hero-agent">
+            <img src="alon.png" alt="Agent Alun" class="hero-agent-img">
         </div>
-
-        <div class="hero-badge">EST. 2026 &bull; SOLANA</div>
+        <div class="hero-badge">POWERED BY PUMP.FUN &bull; SOLANA</div>
         <h1 class="hero-title">
-            <span class="hero-the">THE</span>
-            <span class="hero-burning">BURNING</span>
-            <span class="hero-company">COMPANY</span>
+            <span class="hero-line-1">AGENT</span>
+            <span class="hero-line-2">ALUN</span>
         </h1>
-        <p class="hero-tagline">We don't print money. We delete it.</p>
+        <p class="hero-tagline">The Burning Company — 100% Buyback & Burn</p>
         <div class="hero-stats">
             <div class="stat">
                 <div class="stat-value" id="marketCap">$0</div>
@@ -89,10 +84,8 @@
             </div>
         </div>
         <div class="hero-actions">
-            <a href="#" class="btn btn-primary">
-                <span class="btn-fire">🔥</span> Buy $BURNING
-            </a>
-            <a href="https://x.com/_BurningCompany" target="_blank" class="btn btn-secondary">Follow the Agent</a>
+            <a href="#" class="btn btn-primary">Buy $BURNING</a>
+            <a href="https://x.com/_BurningCompany" target="_blank" class="btn btn-secondary">Follow Agent Alun</a>
         </div>
         <div class="hero-ca">
             <span class="ca-label">CA:</span>
@@ -101,44 +94,34 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             </button>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-        </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section class="section" id="about">
         <div class="container">
             <div class="section-label">ABOUT</div>
-            <h2 class="section-title">Solana's Premier<br><span class="highlight">Deflationary Institution</span></h2>
+            <h2 class="section-title">Meet <span class="highlight">Agent Alun</span></h2>
+            <p class="section-subtitle">The AI agent running Solana's most aggressive burn operation. 100% of fees. Zero mercy.</p>
             <div class="about-grid">
                 <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#FF4500" stroke-width="2"/><path d="M24 14L28 22H20L24 14Z" fill="#FF4500"/><line x1="24" y1="22" x2="24" y2="34" stroke="#FF4500" stroke-width="2"/></svg>
-                    </div>
-                    <h3>Automated Burns</h3>
-                    <p>The agent runs 24/7. Fees come in, tokens get bought off the market, and sent straight to the incinerator. No human intervention. No delays. Just deletion.</p>
+                    <div class="about-emoji">🔥</div>
+                    <h3>100% Burn</h3>
+                    <p>Every single fee collected goes to buying $BURNING off the market and incinerating it. No treasury. No team cut. Pure deletion.</p>
                 </div>
                 <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" stroke="#FFD700" stroke-width="2"/><line x1="6" y1="18" x2="42" y2="18" stroke="#FFD700" stroke-width="2"/><line x1="6" y1="30" x2="42" y2="30" stroke="#FFD700" stroke-width="2"/><line x1="20" y1="6" x2="20" y2="42" stroke="#FFD700" stroke-width="2"/></svg>
-                    </div>
-                    <h3>Full Transparency</h3>
-                    <p>Every burn is logged on-chain and tweeted in real time by Agent Alun. Full transparency. We run this like a real company (sort of).</p>
+                    <div class="about-emoji">🤖</div>
+                    <h3>AI Agent</h3>
+                    <p>Agent Alun runs 24/7 on pump.fun's tokenized agent infrastructure. Automated buybacks. Automated burns. Automated tweets.</p>
                 </div>
                 <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="8" stroke="#FF4500" stroke-width="2"/><path d="M12 38C12 31.3726 17.3726 26 24 26C30.6274 26 36 31.3726 36 38" stroke="#FF4500" stroke-width="2"/></svg>
-                    </div>
-                    <h3>Agent Alun</h3>
-                    <p>Our AI agent pretends to be the founder of pump.fun. He tweets about burns like he's making billion-dollar deals. He takes his sunglasses very seriously.</p>
+                    <div class="about-emoji">🕶️</div>
+                    <h3>The Character</h3>
+                    <p>Agent Alun is a parody AI pretending to be the pump.fun founder. Sunglasses on. Phone calls happening. Big deals closing (the deals are burns).</p>
                 </div>
                 <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 48 48" fill="none"><path d="M8 38L14 26L22 32L30 16L40 22" stroke="#FFD700" stroke-width="2" fill="none"/><circle cx="14" cy="26" r="2" fill="#FFD700"/><circle cx="22" cy="32" r="2" fill="#FFD700"/><circle cx="30" cy="16" r="2" fill="#FFD700"/><circle cx="40" cy="22" r="2" fill="#FFD700"/></svg>
-                    </div>
-                    <h3>Community Growth</h3>
-                    <p>100% of fees go to buying and burning tokens. The community grows through pure deflation. Less supply, more value.</p>
+                    <div class="about-emoji">⛓️</div>
+                    <h3>On-Chain Proof</h3>
+                    <p>Every burn is verified on Solana and tweeted with a Solscan link. Full transparency. No trust required — just verify.</p>
                 </div>
             </div>
         </div>
@@ -148,53 +131,45 @@
     <section class="section section-dark" id="how">
         <div class="container">
             <div class="section-label">MECHANISM</div>
-            <h2 class="section-title">How The <span class="highlight">Burn</span> Works</h2>
+            <h2 class="section-title">How Agent Alun <span class="highlight">Burns</span></h2>
             <div class="flow">
                 <div class="flow-step">
                     <div class="flow-number">01</div>
                     <div class="flow-content">
                         <h3>Fees Accumulate</h3>
-                        <p>The pump.fun agent collects trading fees automatically via the payments SDK.</p>
+                        <p>Trading fees are collected automatically by pump.fun's tokenized agent system.</p>
                     </div>
                 </div>
-                <div class="flow-arrow">
-                    <svg viewBox="0 0 24 60" fill="none"><path d="M12 0V50M4 42L12 54L20 42" stroke="#FF4500" stroke-width="2"/></svg>
-                </div>
+                <div class="flow-arrow"><div class="flow-arrow-line"></div></div>
                 <div class="flow-step">
                     <div class="flow-number">02</div>
                     <div class="flow-content">
-                        <h3>100% Burn</h3>
-                        <p>100% of all fees are allocated for buyback & burn. No treasury. No team cut.</p>
+                        <h3>100% Allocated</h3>
+                        <p>Every fee goes to buyback & burn. No split. No treasury. All fire.</p>
                     </div>
                 </div>
-                <div class="flow-arrow">
-                    <svg viewBox="0 0 24 60" fill="none"><path d="M12 0V50M4 42L12 54L20 42" stroke="#FF4500" stroke-width="2"/></svg>
-                </div>
+                <div class="flow-arrow"><div class="flow-arrow-line"></div></div>
                 <div class="flow-step">
                     <div class="flow-number">03</div>
                     <div class="flow-content">
-                        <h3>Market Buy</h3>
-                        <p>Agent executes a market buy of $BURNING via PumpFun Agent at optimal price.</p>
+                        <h3>Market Buyback</h3>
+                        <p>Agent Alun buys $BURNING off the market through pump.fun's infrastructure.</p>
                     </div>
                 </div>
-                <div class="flow-arrow">
-                    <svg viewBox="0 0 24 60" fill="none"><path d="M12 0V50M4 42L12 54L20 42" stroke="#FF4500" stroke-width="2"/></svg>
-                </div>
+                <div class="flow-arrow"><div class="flow-arrow-line"></div></div>
                 <div class="flow-step">
                     <div class="flow-number">04</div>
                     <div class="flow-content">
                         <h3>Incinerate</h3>
-                        <p>The Agent proceeds to incinerate tokens. Gone forever. Supply deleted.</p>
+                        <p>Purchased tokens are burned on-chain. Gone forever. Supply deleted.</p>
                     </div>
                 </div>
-                <div class="flow-arrow">
-                    <svg viewBox="0 0 24 60" fill="none"><path d="M12 0V50M4 42L12 54L20 42" stroke="#FF4500" stroke-width="2"/></svg>
-                </div>
+                <div class="flow-arrow"><div class="flow-arrow-line"></div></div>
                 <div class="flow-step">
                     <div class="flow-number">05</div>
                     <div class="flow-content">
-                        <h3>Tweet & Log</h3>
-                        <p>Every burn is logged on-chain and the agent tweets about it like he just won a Nobel Prize.</p>
+                        <h3>Agent Tweets</h3>
+                        <p>Agent Alun tweets the burn with amount and Solscan proof. The people must know.</p>
                     </div>
                 </div>
             </div>
@@ -206,40 +181,19 @@
         <div class="container">
             <div class="section-label">TOKENOMICS</div>
             <h2 class="section-title"><span class="highlight">100%</span> Buyback & Burn</h2>
-            <div class="tokenomics-grid">
-                <div class="tokenomics-visual">
-                    <div class="donut-chart">
-                        <svg viewBox="0 0 200 200">
-                            <circle cx="100" cy="100" r="80" fill="none" stroke="#1a1a2e" stroke-width="30"/>
-                            <circle cx="100" cy="100" r="80" fill="none" stroke="#FF4500" stroke-width="30"
-                                stroke-dasharray="502.65 0" stroke-dashoffset="125.66" class="donut-burn"/>
-                        </svg>
-                        <div class="donut-center">
-                            <div class="donut-label">ALL FEES</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tokenomics-details">
-                    <div class="token-split burn-split">
-                        <div class="split-header">
-                            <span class="split-dot burn-dot"></span>
-                            <span class="split-pct">100%</span>
-                            <span class="split-name">Buyback & Burn</span>
-                        </div>
-                        <p>Every single fee goes to buying $BURNING off the market and sending it to the incinerator. No treasury. No team allocation. Pure deletion.</p>
-                    </div>
-                </div>
+            <div class="tokenomics-simple">
+                <div class="token-big-number">100<span class="token-pct">%</span></div>
+                <p class="token-desc">of all fees go to buying and burning $BURNING. No treasury. No team allocation. No exceptions. Every fee feeds the incinerator.</p>
             </div>
         </div>
     </section>
 
-    <!-- Tokenized Agent Stats -->
+    <!-- Live Activity Feed -->
     <section class="section section-dark" id="burns">
         <div class="container">
             <div class="section-label">TOKENIZED AGENT</div>
             <h2 class="section-title">Activity <span class="highlight">Ledger</span></h2>
 
-            <!-- Agent Revenue Panel -->
             <div class="agent-stats-panel">
                 <div class="agent-stat-card">
                     <div class="agent-stat-header">Revenue</div>
@@ -255,7 +209,6 @@
                 </div>
             </div>
 
-            <!-- Live Activity Summary Bar -->
             <div class="activity-summary">
                 <div class="summary-item summary-burn">
                     <span class="summary-icon">🔥</span>
@@ -280,7 +233,6 @@
                 <span class="legend-item"><span class="legend-dot legend-sell"></span> Sell</span>
             </div>
             <div class="burn-feed" id="activityFeed">
-                <!-- Replaced by live data from /api/activity -->
                 <div class="burn-entry entry-buy">
                     <div class="entry-icon entry-icon-buy">BUY</div>
                     <div class="burn-info">
@@ -303,7 +255,7 @@
     <section class="section" id="agent">
         <div class="container">
             <div class="section-label">THE AGENT</div>
-            <h2 class="section-title">Meet <span class="highlight">Agent Alun</span><br>Head of Deletion</h2>
+            <h2 class="section-title">Agent <span class="highlight">Alun</span></h2>
             <div class="agent-grid">
                 <div class="agent-profile">
                     <div class="agent-avatar">
@@ -319,7 +271,7 @@
                         <div class="id-name">Agent Alun</div>
                         <div class="id-title">Head of Deletion</div>
                         <div class="id-title">Chief Deflationary Officer</div>
-                        <div class="id-dept">Dept. of Strategic Token Deletion</div>
+                        <div class="id-dept">Powered by pump.fun</div>
                     </div>
                 </div>
                 <div class="agent-tweets">
@@ -331,71 +283,58 @@
         </div>
     </section>
 
-
     <!-- Roadmap -->
-    <section class="section" id="roadmap">
+    <section class="section section-dark" id="roadmap">
         <div class="container">
             <div class="section-label">ROADMAP</div>
-            <h2 class="section-title">The Path to <span class="highlight">Maximum Deletion</span></h2>
+            <h2 class="section-title">The <span class="highlight">Plan</span></h2>
             <div class="roadmap">
                 <div class="roadmap-item active">
-                    <div class="roadmap-marker">
-                        <div class="roadmap-dot"></div>
-                        <div class="roadmap-line"></div>
-                    </div>
+                    <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
                     <div class="roadmap-content">
                         <div class="roadmap-phase">PHASE 1</div>
-                        <h3>Ignition</h3>
+                        <h3>Launch</h3>
                         <ul>
                             <li>Deploy $BURNING on pump.fun</li>
-                            <li>Configure burn agent with Pump.fun Agent</li>
-                            <li>Launch X account & website</li>
-                            <li>First automated burn event</li>
+                            <li>Enable tokenized agent (100% buyback)</li>
+                            <li>Launch Agent Alun on X</li>
+                            <li>Website live with real-time data</li>
                         </ul>
                     </div>
                 </div>
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">
-                        <div class="roadmap-dot"></div>
-                        <div class="roadmap-line"></div>
-                    </div>
+                    <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
                     <div class="roadmap-content">
                         <div class="roadmap-phase">PHASE 2</div>
-                        <h3>Controlled Burn</h3>
+                        <h3>Graduation</h3>
                         <ul>
-                            <li>First art competition</li>
-                            <li>DEX boost campaign</li>
-                            <li>Live burn tracker on website</li>
+                            <li>Bonding curve completes</li>
+                            <li>First automated buyback & burn</li>
+                            <li>Agent Alun tweets every burn live</li>
                         </ul>
                     </div>
                 </div>
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">
-                        <div class="roadmap-dot"></div>
-                        <div class="roadmap-line"></div>
-                    </div>
+                    <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
                     <div class="roadmap-content">
                         <div class="roadmap-phase">PHASE 3</div>
-                        <h3>Wildfire</h3>
+                        <h3>Expansion</h3>
                         <ul>
                             <li>1% total supply burned milestone</li>
                             <li>Agent personality expansion</li>
-                            <li>Partnership with other burn projects</li>
-                            <li>Burn leaderboard & holder dashboard</li>
+                            <li>Community events & partnerships</li>
                         </ul>
                     </div>
                 </div>
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">
-                        <div class="roadmap-dot"></div>
-                    </div>
+                    <div class="roadmap-marker"><div class="roadmap-dot"></div></div>
                     <div class="roadmap-content">
                         <div class="roadmap-phase">PHASE 4</div>
-                        <h3>Inferno</h3>
+                        <h3>Domination</h3>
                         <ul>
                             <li>10% total supply burned</li>
-                            <li>Merch store (paid in $BURNING, then burned)</li>
-                            <li>The Burning Company Annual Report (a meme PDF)</li>
+                            <li>Agent Alun becomes self-aware (not really)</li>
+                            <li>The most deleted token on Solana</li>
                         </ul>
                     </div>
                 </div>
@@ -403,18 +342,14 @@
         </div>
     </section>
 
-    <!-- CTA / Footer -->
+    <!-- CTA -->
     <section class="section section-cta">
         <div class="container">
-            <div class="cta-seal">
-                <img src="image.png" alt="The Burning Company" class="cta-seal-img">
-            </div>
-            <h2 class="cta-title">Join The Burning Company</h2>
-            <p class="cta-text">Every token burned is a token that will never be sold.<br>The incinerator doesn't take days off.</p>
+            <img src="alon.png" alt="Agent Alun" class="cta-agent-img">
+            <h2 class="cta-title">Join Agent Alun</h2>
+            <p class="cta-text">Every token burned is a token that will never be sold.<br>Agent Alun never stops deleting.</p>
             <div class="cta-actions">
-                <a href="#" class="btn btn-primary btn-lg">
-                    <span class="btn-fire">🔥</span> Buy $BURNING
-                </a>
+                <a href="#" class="btn btn-primary btn-lg">Buy $BURNING</a>
                 <a href="https://x.com/_BurningCompany" target="_blank" class="btn btn-secondary btn-lg">Follow on 𝕏</a>
             </div>
         </div>
@@ -425,31 +360,30 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">The Burning Company</div>
-                    <p>Solana's Premier Deflationary Institution</p>
-                    <p class="footer-est">Est. 2026</p>
+                    <p>Powered by pump.fun</p>
+                    <p class="footer-est">100% Buyback & Burn</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Company</h4>
+                    <h4>Navigate</h4>
                     <a href="#about">About</a>
-                    <a href="#tokenomics">Tokenomics</a>
-                    <a href="#burns">Live Burns</a>
+                    <a href="#how">How It Works</a>
+                    <a href="#burns">Live Feed</a>
                     <a href="#roadmap">Roadmap</a>
                 </div>
                 <div class="footer-links">
                     <h4>Community</h4>
                     <a href="https://x.com/_BurningCompany" target="_blank">Twitter / X</a>
                     <a href="#" target="_blank">DexScreener</a>
+                    <a href="#" target="_blank">Pump.fun</a>
                 </div>
                 <div class="footer-links">
-                    <h4>Transparency</h4>
+                    <h4>Verify</h4>
                     <a href="#burns">Burn Ledger</a>
                     <a href="#">Burn Address</a>
-                    <a href="#">Source Code</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 The Burning Company. All tokens are deleted, not financial advice.</p>
-                <p class="footer-quote">"We don't print money. We delete it." — Agent Alun, Head of Deletion</p>
+                <p>&copy; 2026 The Burning Company. Not financial advice. Tokens are deleted, not created.</p>
             </div>
         </div>
     </footer>

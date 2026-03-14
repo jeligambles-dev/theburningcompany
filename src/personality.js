@@ -1,6 +1,8 @@
 import OpenAI from "openai";
 
-const client = new OpenAI();
+const client = process.env.OPENAI_API_KEY
+  ? new OpenAI()
+  : null;
 
 const SYSTEM_PROMPT = `You are Boris, the Head of Deletion at The Burning Company — a Solana-based token burn operation.
 
@@ -32,6 +34,10 @@ CONSTRAINTS:
  * Generate a tweet for a specific occasion
  */
 export async function generateTweet(context) {
+  if (!client) {
+    console.warn("[PERSONALITY] OpenAI not configured, skipping tweet generation");
+    return null;
+  }
   const response = await client.chat.completions.create({
     model: "gpt-4.1",
     max_tokens: 300,

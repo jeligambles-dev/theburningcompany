@@ -1,9 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 
-const HELIUS_RPC = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
-const TOKEN_MINT = process.env.AGENT_TOKEN_MINT_ADDRESS;
-const AGENT_PROGRAM_ID = new PublicKey("AgenTMiC2hvxGebTsgmsD4HHBa8WEcqGFf87iwRRxLo7");
-const SOL_MINT = new PublicKey("So11111111111111111111111111111111111111112");
+const AGENT_PROGRAM_ID_STR = "AgenTMiC2hvxGebTsgmsD4HHBa8WEcqGFf87iwRRxLo7";
+const SOL_MINT_STR = "So11111111111111111111111111111111111111112";
 
 /**
  * Fetches real on-chain buy/sell/burn activity for a pump.fun token
@@ -11,9 +9,18 @@ const SOL_MINT = new PublicKey("So11111111111111111111111111111111111111112");
  */
 export class TokenTracker {
   constructor() {
-    this.connection = new Connection(HELIUS_RPC, "confirmed");
+    const rpc = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
+    const TOKEN_MINT = process.env.AGENT_TOKEN_MINT_ADDRESS;
+    const AGENT_PROGRAM_ID = new PublicKey(AGENT_PROGRAM_ID_STR);
+    const SOL_MINT = new PublicKey(SOL_MINT_STR);
+
+    this.rpcUrl = rpc;
+    this.connection = new Connection(rpc, "confirmed");
     this.tokenMint = new PublicKey(TOKEN_MINT);
-    this.poolAddress = null; // fetched from pump.fun metadata
+    this.tokenMintStr = TOKEN_MINT;
+    this.solMint = SOL_MINT;
+    this.agentProgramId = AGENT_PROGRAM_ID;
+    this.poolAddress = null;
 
     // Buyback authority PDA (for counting burn events)
     const [buybackAuthority] = PublicKey.findProgramAddressSync(
@@ -139,7 +146,7 @@ export class TokenTracker {
       try {
         const { getAssociatedTokenAddressSync } = await import("@solana/spl-token");
         const buybackVault = getAssociatedTokenAddressSync(
-          SOL_MINT,
+          this.solMint,
           this.buybackAuthorityPDA,
           true
         );
@@ -187,14 +194,14 @@ export class TokenTracker {
 
     try {
       // Get supply from RPC
-      const supplyRes = await fetch(HELIUS_RPC, {
+      const supplyRes = await fetch(this.rpcUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           jsonrpc: "2.0",
           id: 1,
           method: "getTokenSupply",
-          params: [TOKEN_MINT],
+          params: [this.tokenMintStr],
         }),
       });
       const supplyData = await supplyRes.json();
@@ -204,7 +211,7 @@ export class TokenTracker {
       let pumpData = null;
       try {
         const res = await fetch(
-          `https://frontend-api-v3.pump.fun/coins/${TOKEN_MINT}`
+          `https://frontend-api-v3.pump.fun/coins/${this.tokenMintStr}`
         );
         if (res.ok) pumpData = await res.json();
       } catch {}
@@ -222,7 +229,7 @@ export class TokenTracker {
       const supplyReduced = (totalBurned / initialSupply) * 100;
 
       const stats = {
-        mint: TOKEN_MINT,
+        mint: this.tokenMintStr,
         initialSupply,
         currentSupply,
         totalBurned,
@@ -230,7 +237,7 @@ export class TokenTracker {
         decimals: supply?.decimals || 6,
         pumpfun: pumpData
           ? {
-              mint: TOKEN_MINT,
+              mint: this.tokenMintStr,
               name: pumpData.name,
               symbol: pumpData.symbol,
               imageUri: pumpData.image_uri,
@@ -268,14 +275,14 @@ export class TokenTracker {
 
     try {
       // Get recent successful signatures
-      const sigRes = await fetch(HELIUS_RPC, {
+      const sigRes = await fetch(this.rpcUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           jsonrpc: "2.0",
           id: 1,
           method: "getSignaturesForAddress",
-          params: [TOKEN_MINT, { limit: 40 }],
+          params: [this.tokenMintStr, { limit: 40 }],
         }),
       });
       const sigData = await sigRes.json();
@@ -310,7 +317,7 @@ export class TokenTracker {
 
   async parseTransaction(signature, blockTime) {
     try {
-      const res = await fetch(HELIUS_RPC, {
+      const res = await fetch(this.rpcUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -389,12 +396,12 @@ export class TokenTracker {
     const postMap = {};
 
     for (const b of pre) {
-      if (b.mint === TOKEN_MINT) {
+      if (b.mint === this.tokenMintStr) {
         preMap[b.owner] = parseFloat(b.uiTokenAmount.uiAmountString || "0");
       }
     }
     for (const b of post) {
-      if (b.mint === TOKEN_MINT) {
+      if (b.mint === this.tokenMintStr) {
         postMap[b.owner] = parseFloat(b.uiTokenAmount.uiAmountString || "0");
       }
     }

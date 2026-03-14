@@ -1,8 +1,6 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 
-const HELIUS_RPC = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
-const AGENT_PROGRAM_ID = new PublicKey("AgenTMiC2hvxGebTsgmsD4HHBa8WEcqGFf87iwRRxLo7");
-const TOKEN_MINT = new PublicKey(process.env.AGENT_TOKEN_MINT_ADDRESS);
+const AGENT_PROGRAM_ID_STR = "AgenTMiC2hvxGebTsgmsD4HHBa8WEcqGFf87iwRRxLo7";
 
 /**
  * Monitors the buyback authority PDA for new burn transactions.
@@ -13,12 +11,19 @@ export class BurnMonitor {
   constructor(twitter, tokenTracker) {
     this.twitter = twitter;
     this.tokenTracker = tokenTracker;
-    this.connection = new Connection(HELIUS_RPC, "confirmed");
+
+    const rpc = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
+    this.rpcUrl = rpc;
+    this.connection = new Connection(rpc, "confirmed");
+
+    const programId = new PublicKey(AGENT_PROGRAM_ID_STR);
+    const tokenMint = new PublicKey(process.env.AGENT_TOKEN_MINT_ADDRESS);
+    this.tokenMint = tokenMint;
 
     // Derive the buyback authority PDA
     const [buybackAuth] = PublicKey.findProgramAddressSync(
-      [Buffer.from("buyback-authority"), TOKEN_MINT.toBuffer()],
-      AGENT_PROGRAM_ID
+      [Buffer.from("buyback-authority"), tokenMint.toBuffer()],
+      programId
     );
     this.buybackAuthority = buybackAuth;
 
@@ -98,7 +103,7 @@ export class BurnMonitor {
    */
   async parseBurnTx(signature) {
     try {
-      const res = await fetch(HELIUS_RPC, {
+      const res = await fetch(this.rpcUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -117,7 +122,7 @@ export class BurnMonitor {
 
       const pre = tx.meta.preTokenBalances || [];
       const post = tx.meta.postTokenBalances || [];
-      const mintStr = TOKEN_MINT.toBase58();
+      const mintStr = this.tokenMint.toBase58();
 
       // Find token balance change on the buyback authority (tokens bought then burned)
       // The burn authority's token balance goes up (buy) then down (burn) in same tx

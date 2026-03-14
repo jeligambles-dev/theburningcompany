@@ -13,9 +13,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.30.0",
-    "@pump-fun/agent-payments-sdk": "^3.0.0",
-    "@solana/web3.js": "^1.98.0",
+        "@solana/web3.js": "^1.98.0",
     "@solana/spl-token": "^0.4.0",
     "openai": "^4.73.0",
     "bs58": "^6.0.0",

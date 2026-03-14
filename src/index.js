@@ -26,15 +26,9 @@ let twitter = null;
 let mentions = null;
 
 async function initOptionalServices() {
-  // Burn engine requires a wallet key
-  if (process.env.AGENT_WALLET_PRIVATE_KEY) {
-    const { BurnEngine } = await import("./burn-engine.js");
-    burnEngine = new BurnEngine(treasury, twitter);
-    burnEngine.start();
-    console.log("[INIT] Burn engine active");
-  } else {
-    console.log("[INIT] Burn engine disabled (no wallet key)");
-  }
+  // Burn engine not needed — pump.fun handles buybacks automatically
+  // Our burn monitor watches for those events and tweets them
+  console.log("[INIT] Buybacks handled by pump.fun infrastructure");
 
   // Twitter requires API keys
   if (process.env.TWITTER_API_KEY) {

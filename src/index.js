@@ -43,11 +43,15 @@ async function initOptionalServices() {
     twitter.startSchedule();
     console.log("[INIT] Twitter bot active");
 
-    // Mentions listener requires twitter
-    const { MentionsRewarder } = await import("./mentions.js");
-    mentions = new MentionsRewarder(twitter);
-    mentions.start();
-    console.log("[INIT] Mentions rewarder active");
+    // Mentions listener requires twitter + wallet key
+    if (process.env.AGENT_WALLET_PRIVATE_KEY) {
+      const { MentionsRewarder } = await import("./mentions.js");
+      mentions = new MentionsRewarder(twitter);
+      mentions.start();
+      console.log("[INIT] Mentions rewarder active");
+    } else {
+      console.log("[INIT] Mentions rewarder disabled (no wallet key)");
+    }
   } else {
     console.log("[INIT] Twitter bot disabled (no API keys)");
   }

@@ -94,10 +94,29 @@ export class TwitterBot {
   }
 
   /**
-   * Return recent tweets Boris has posted (stored in memory)
+   * Fetch recent tweets from the X account in real-time
    */
   async fetchRecentTweets(count = 10) {
-    return this.postedTweets.slice(0, count);
+    try {
+      const me = await this.client.v2.me();
+      const timeline = await this.client.v2.userTimeline(me.data.id, {
+        max_results: Math.min(count, 100),
+        "tweet.fields": ["created_at", "public_metrics", "text"],
+      });
+
+      if (timeline.data?.data) {
+        return timeline.data.data.map((t) => ({
+          id: t.id,
+          text: t.text,
+          createdAt: t.created_at,
+          metrics: t.public_metrics,
+        }));
+      }
+      return [];
+    } catch (err) {
+      console.error("[TWITTER] Failed to fetch tweets:", err.message);
+      return this.postedTweets.slice(0, count);
+    }
   }
 
   /**

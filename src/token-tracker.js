@@ -11,36 +11,45 @@ export class TokenTracker {
   constructor() {
     const rpc = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
     const TOKEN_MINT = process.env.AGENT_TOKEN_MINT_ADDRESS;
-    const AGENT_PROGRAM_ID = new PublicKey(AGENT_PROGRAM_ID_STR);
-    const SOL_MINT = new PublicKey(SOL_MINT_STR);
 
     this.rpcUrl = rpc;
     this.connection = new Connection(rpc, "confirmed");
-    this.tokenMint = new PublicKey(TOKEN_MINT);
     this.tokenMintStr = TOKEN_MINT;
-    this.solMint = SOL_MINT;
-    this.agentProgramId = AGENT_PROGRAM_ID;
     this.poolAddress = null;
+    this.ready = false;
 
-    // Buyback authority PDA (for counting burn events)
-    const [buybackAuthority] = PublicKey.findProgramAddressSync(
-      [Buffer.from("buyback-authority"), this.tokenMint.toBuffer()],
-      AGENT_PROGRAM_ID
-    );
-    this.buybackAuthorityPDA = buybackAuthority;
+    // Only initialize on-chain lookups if we have a mint address
+    if (TOKEN_MINT) {
+      const AGENT_PROGRAM_ID = new PublicKey(AGENT_PROGRAM_ID_STR);
+      const SOL_MINT = new PublicKey(SOL_MINT_STR);
 
-    // Agent payment PDAs
-    const [tokenAgentPayments] = PublicKey.findProgramAddressSync(
-      [Buffer.from("token-agent-payments"), this.tokenMint.toBuffer()],
-      AGENT_PROGRAM_ID
-    );
-    this.tokenAgentPaymentsPDA = tokenAgentPayments;
+      this.tokenMint = new PublicKey(TOKEN_MINT);
+      this.solMint = SOL_MINT;
+      this.agentProgramId = AGENT_PROGRAM_ID;
 
-    const [paymentInCurrency] = PublicKey.findProgramAddressSync(
-      [Buffer.from("payment-in-currency"), this.tokenMint.toBuffer(), SOL_MINT.toBuffer()],
-      AGENT_PROGRAM_ID
-    );
-    this.paymentInCurrencyPDA = paymentInCurrency;
+      const [buybackAuthority] = PublicKey.findProgramAddressSync(
+        [Buffer.from("buyback-authority"), this.tokenMint.toBuffer()],
+        AGENT_PROGRAM_ID
+      );
+      this.buybackAuthorityPDA = buybackAuthority;
+
+      const [tokenAgentPayments] = PublicKey.findProgramAddressSync(
+        [Buffer.from("token-agent-payments"), this.tokenMint.toBuffer()],
+        AGENT_PROGRAM_ID
+      );
+      this.tokenAgentPaymentsPDA = tokenAgentPayments;
+
+      const [paymentInCurrency] = PublicKey.findProgramAddressSync(
+        [Buffer.from("payment-in-currency"), this.tokenMint.toBuffer(), SOL_MINT.toBuffer()],
+        AGENT_PROGRAM_ID
+      );
+      this.paymentInCurrencyPDA = paymentInCurrency;
+
+      this.ready = true;
+      console.log("[TOKEN TRACKER] Initialized for", TOKEN_MINT.slice(0, 8) + "...");
+    } else {
+      console.log("[TOKEN TRACKER] No mint address — running in standby mode");
+    }
 
     // Cache
     this.activityCache = [];
@@ -62,6 +71,21 @@ export class TokenTracker {
   /**
    * Fetch live SOL/USD price. Jupiter primary, CoinGecko fallback.
    */
+  async getAgentStats() {
+    if (!this.ready) return {};
+    return this._getAgentStats();
+  }
+
+  async getTokenStats() {
+    if (!this.ready) return { totalBurned: 0, supplyReduced: 0, initialSupply: 0, currentSupply: 0, pumpfun: null };
+    return this._getTokenStats();
+  }
+
+  async getActivity(limit = 20) {
+    if (!this.ready) return [];
+    return this._getActivity(limit);
+  }
+
   async getSolPrice() {
     if (Date.now() - this.solPriceCacheTimestamp < this.solPriceCacheTTL && this.solPriceCache > 0) {
       return this.solPriceCache;
@@ -102,7 +126,7 @@ export class TokenTracker {
     return this.solPriceCache;
   }
 
-  async getAgentStats() {
+  async _getAgentStats() {
     if (Date.now() - this.agentStatsCacheTimestamp < this.statsCacheTTL && this.agentStatsCache) {
       return this.agentStatsCache;
     }
@@ -187,7 +211,7 @@ export class TokenTracker {
     }
   }
 
-  async getTokenStats() {
+  async _getTokenStats() {
     if (Date.now() - this.statsCacheTimestamp < this.statsCacheTTL && this.statsCache) {
       return this.statsCache;
     }
@@ -260,7 +284,7 @@ export class TokenTracker {
     }
   }
 
-  async getActivity(limit = 20) {
+  async _getActivity(limit = 20) {
     if (
       Date.now() - this.activityCacheTimestamp < this.activityCacheTTL &&
       this.activityCache.length

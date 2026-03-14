@@ -327,7 +327,7 @@ async function fetchTweets() {
             div.innerHTML = `
                 <a href="${tweetUrl}" target="_blank" rel="noopener" class="tweet-link">
                     <div class="tweet-header">
-                        <strong>Boris</strong> <span class="tweet-handle">@_BurningCompany</span>
+                        <strong>Agent Alun</strong> <span class="tweet-handle">@_BurningCompany</span>
                         <span class="tweet-time">· ${timeAgo}</span>
                     </div>
                     <p>${safeText}</p>

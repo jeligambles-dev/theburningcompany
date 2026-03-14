@@ -15,8 +15,8 @@ export class TwitterBot {
       accessSecret: process.env.TWITTER_ACCESS_SECRET,
     });
 
-    // Bearer token client for reading (higher rate limits)
-    this.readClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN);
+    // Same user client for reading (timeline requires OAuth 1.0a)
+    this.readClient = this.client;
 
     this.shitpostIntervalHours = parseInt(
       process.env.TWEET_SHITPOST_INTERVAL_HOURS || "6"
@@ -26,10 +26,8 @@ export class TwitterBot {
 
     this.scheduledIntervals = [];
 
-    // Cache for fetched tweets
-    this.tweetCache = [];
-    this.cacheTimestamp = 0;
-    this.cacheTTL = 60_000; // 1 minute
+    // Store tweets Boris posts (free tier doesn't allow timeline reads)
+    this.postedTweets = [];
   }
 
   /**
@@ -39,6 +37,18 @@ export class TwitterBot {
     try {
       const result = await this.client.v2.tweet(text);
       console.log(`[TWITTER] Posted: "${text.slice(0, 60)}..."`);
+
+      // Store for website display
+      if (result?.data) {
+        this.postedTweets.unshift({
+          id: result.data.id,
+          text: text,
+          createdAt: new Date().toISOString(),
+        });
+        // Keep last 20
+        if (this.postedTweets.length > 20) this.postedTweets.length = 20;
+      }
+
       return result;
     } catch (err) {
       console.error("[TWITTER] Failed to post:", err.message);
@@ -84,46 +94,10 @@ export class TwitterBot {
   }
 
   /**
-   * Fetch recent tweets from the account (for website display)
+   * Return recent tweets Boris has posted (stored in memory)
    */
   async fetchRecentTweets(count = 10) {
-    // Return cache if fresh
-    if (Date.now() - this.cacheTimestamp < this.cacheTTL && this.tweetCache.length) {
-      return this.tweetCache;
-    }
-
-    try {
-      // Get the authenticated user's ID
-      const me = await this.readClient.v2.me();
-      const userId = me.data.id;
-
-      // Fetch recent tweets
-      const timeline = await this.readClient.v2.userTimeline(userId, {
-        max_results: count,
-        "tweet.fields": ["created_at", "public_metrics", "text"],
-        "user.fields": ["name", "username", "profile_image_url"],
-        expansions: ["author_id"],
-      });
-
-      const tweets = [];
-      for await (const tweet of timeline) {
-        tweets.push({
-          id: tweet.id,
-          text: tweet.text,
-          createdAt: tweet.created_at,
-          metrics: tweet.public_metrics,
-        });
-      }
-
-      // Update cache
-      this.tweetCache = tweets;
-      this.cacheTimestamp = Date.now();
-
-      return tweets;
-    } catch (err) {
-      console.error("[TWITTER] Failed to fetch tweets:", err.message);
-      return this.tweetCache; // return stale cache on error
-    }
+    return this.postedTweets.slice(0, count);
   }
 
   /**

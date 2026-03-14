@@ -133,7 +133,7 @@ function updateHeroStats(data) {
 function updateBurnTotal(data) {
     const totalValue = document.querySelector('.burn-total-value');
     if (totalValue) {
-        totalValue.textContent = Math.floor(data.totalBurned).toLocaleString() + ' $BURNING';
+        totalValue.textContent = Math.floor(data.totalBurned).toLocaleString() + ' $Alun';
     }
 
     // Update agent stats panel from real on-chain data
@@ -239,7 +239,7 @@ function createActivityEntry(item) {
         entry.innerHTML = `
             <div class="entry-icon entry-icon-buy">BUY</div>
             <div class="burn-info">
-                <div class="burn-amount amount-buy">${displayAmount} $BURNING</div>
+                <div class="burn-amount amount-buy">${displayAmount} $Alun</div>
                 <div class="burn-detail">${walletShort}${solDetail ? ' · ' + solDetail : ''}</div>
             </div>
             <div class="burn-meta">
@@ -251,7 +251,7 @@ function createActivityEntry(item) {
         entry.innerHTML = `
             <div class="entry-icon entry-icon-burn">BURN</div>
             <div class="burn-info">
-                <div class="burn-amount amount-burn">${displayAmount} $BURNING</div>
+                <div class="burn-amount amount-burn">${displayAmount} $Alun</div>
                 <div class="burn-detail">${walletShort} → supply deleted</div>
             </div>
             <div class="burn-meta">
@@ -264,7 +264,7 @@ function createActivityEntry(item) {
         entry.innerHTML = `
             <div class="entry-icon entry-icon-sell">SELL</div>
             <div class="burn-info">
-                <div class="burn-amount amount-sell">${displayAmount} $BURNING</div>
+                <div class="burn-amount amount-sell">${displayAmount} $Alun</div>
                 <div class="burn-detail">${walletShort}${item.solAmount ? ' · ' + item.solAmount.toFixed(4) + ' SOL' : ''}</div>
             </div>
             <div class="burn-meta">
@@ -322,12 +322,12 @@ async function fetchTweets() {
                 .replace(/>/g, '&gt;')
                 .replace(/\n/g, '<br>');
 
-            const tweetUrl = tweet.id ? `https://x.com/_BurningCompany/status/${tweet.id}` : '#';
+            const tweetUrl = tweet.id ? `https://x.com/AgentAlun/status/${tweet.id}` : '#';
 
             div.innerHTML = `
                 <a href="${tweetUrl}" target="_blank" rel="noopener" class="tweet-link">
                     <div class="tweet-header">
-                        <strong>Agent Alun</strong> <span class="tweet-handle">@_BurningCompany</span>
+                        <strong>Agent Alun</strong> <span class="tweet-handle">@AgentAlun</span>
                         <span class="tweet-time">· ${timeAgo}</span>
                     </div>
                     <p>${safeText}</p>

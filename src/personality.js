@@ -61,7 +61,7 @@ export async function generateTweet(context) {
 export async function generateBurnTweet(burnEvent) {
   const solscanUrl = `https://solscan.io/tx/${burnEvent.burnTx}`;
   const context = `A burn just happened. Data:
-- Tokens burned: ${burnEvent.tokensBurned.toLocaleString()} $BURNING
+- Tokens burned: ${burnEvent.tokensBurned.toLocaleString()} $Alun
 - SOL spent on buyback: ${burnEvent.solSpent?.toFixed(4) || '?'} SOL
 - This is burn event #${burnEvent.id}
 - Solscan link: ${solscanUrl}
@@ -104,7 +104,7 @@ export async function generateShitpost() {
 export async function generateTreasuryReport(treasuryData) {
   const context = `Write a weekly report tweet. Data:
 - Total fees collected this week: ${treasuryData.weeklyFees.toFixed(4)} SOL
-- Amount burned (100%): ${treasuryData.weeklyBurned.toLocaleString()} $BURNING
+- Amount burned (100%): ${treasuryData.weeklyBurned.toLocaleString()} $Alun
 - 100% goes to buyback and burn. No treasury. Pure deletion.
 
 Format it like a corporate report but make it funny. Use line breaks.`;

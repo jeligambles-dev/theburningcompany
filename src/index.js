@@ -105,7 +105,7 @@ app.get("*", (_req, res) => {
 app.listen(PORT, async () => {
   console.log(`
   ╔══════════════════════════════════════╗
-  ║     THE BURNING COMPANY             ║
+  ║     AGENT ALUN                      ║
   ║     "We don't print money.          ║
   ║      We delete it."                 ║
   ║                                     ║

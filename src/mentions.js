@@ -260,7 +260,7 @@ export class MentionsRewarder {
         if (!address) {
           // Reply asking for their address
           const replyText = await generateTweet(
-            `Someone tweeted something nice about The Burning Company. Reply to them thanking them and ask them to reply with their Solana wallet address to receive a small $BURNING reward. Keep it brief and in character.`
+            `Someone tweeted something nice about Agent Alun. Reply to them thanking them and ask them to reply with their Solana wallet address to receive a small $BURNING reward. Keep it brief and in character.`
           );
           await this.twitter.client.v2.reply(replyText, tweet.id);
           console.log(`[MENTIONS] Asked @${author.username} for wallet`);

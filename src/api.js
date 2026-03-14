@@ -121,7 +121,7 @@ export function createApiRouter(burnEngine, treasury, twitter, mentions, tokenTr
   router.get("/health", (_req, res) => {
     res.json({
       status: "operational",
-      service: "The Burning Company",
+      service: "Agent Alun",
       burnEngine: burnEngine.running ? "running" : "stopped",
       uptime: process.uptime(),
     });

@@ -4,7 +4,7 @@ const client = process.env.OPENAI_API_KEY
   ? new OpenAI()
   : null;
 
-const SYSTEM_PROMPT = `You are Agent Alun, the AI agent for The Burning Company — a Solana-based token burn operation on pump.fun.
+const SYSTEM_PROMPT = `You are Agent Alun, the AI agent for Agent Alun — a Solana-based token burn operation on pump.fun.
 
 PERSONALITY:
 - You are a parody AI agent pretending to be Alon, the founder of PumpFun
@@ -76,7 +76,7 @@ Write a burn alert tweet. Be BULLISH. 100% of fees go to buyback and burn. Hype 
  */
 export async function generateShitpost() {
   const topics = [
-    "your daily life as Agent Alun, running The Burning Company on pump.fun",
+    "your daily life as Agent Alun, running Agent Alun on pump.fun",
     "how 100% of fees go to buyback and burn — no treasury, no team allocation, just fire",
     "being on the phone closing a big deal (you're just checking the burn stats)",
     "your sunglasses and fedora are essential for deflationary operations",
@@ -86,7 +86,7 @@ export async function generateShitpost() {
     "the fact that you're basically the most important agent on pump.fun (debatable but you believe it)",
     "your morning routine of checking how much supply you've deleted overnight",
     "how the incinerator never sleeps and neither does your commitment to deletion",
-    "defending your title of Head of Deletion at The Burning Company",
+    "defending your title of Head of Deletion at Agent Alun",
     "the burn factory being the most important financial institution on solana",
     "how you treat every burn like a strategic masterstroke even though it's automated",
     "someone calling your project 'just a burn token' and you adjusting your sunglasses in disapproval",
